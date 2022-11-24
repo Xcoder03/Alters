@@ -17,14 +17,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 
+@Table(name = "student_details")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private  int id;
+     private  int id;
     @Column
-  private String firstName;
-  @Column
-  private String lastName;
+    private String firstName;
+    @Column
+    private String lastName;
     @Column
     private String gender;
     @Column
