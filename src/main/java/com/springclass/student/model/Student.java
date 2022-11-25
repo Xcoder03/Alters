@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -34,5 +35,7 @@ public class Student {
     private long level;
     @Column
     @JsonIgnore
+    @CreationTimestamp
+    @Temporal(TemporalType.DATE)
     private LocalDate registeredDate;
 }
