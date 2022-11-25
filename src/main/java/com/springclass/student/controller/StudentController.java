@@ -26,6 +26,17 @@ public class StudentController {
         return byID;
     }
 
+    @GetMapping("/filterbydept/{department}")
+    public List<Student> getbyDepartment(@PathVariable(name="department") String dept){
+        return stdrepo.findByDepartment(dept);
+    }
+
+    @GetMapping("/filterbylevel/{level}")
+    public List<Student> getbyLevel(@PathVariable(name="level") long lvl){
+        return stdrepo.findByLevel(lvl);
+    }
+
+
 
 
     //post requests

@@ -35,7 +35,6 @@ public class Student {
     private long level;
     @Column
     @JsonIgnore
-    @CreationTimestamp
-    @Temporal(TemporalType.DATE)
+
     private LocalDate registeredDate;
 }
