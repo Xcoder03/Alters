@@ -17,4 +17,7 @@ public interface StudentRespository extends JpaRepository<Student, Integer> {
     @Query(value = "SELECT o FROM Student o WHERE o.level =:lvl ")
     List<Student> findByLevel(@Param("lvl") long lvl);
 
+    @Query(value = "SELECT o FROM Student o WHERE o.gender =:gen ")
+    List<Student> findByGender(@Param("gen") String gen);
+
 }

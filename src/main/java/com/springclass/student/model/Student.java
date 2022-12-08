@@ -9,6 +9,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -24,14 +27,20 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private  int id;
     @Column
+    @NotNull
     private String firstName;
     @Column
+    @NotNull
     private String lastName;
     @Column
+    @NotNull
     private String gender;
     @Column
+    @NotNull
     private String department;
     @Column
+    @NotNull
+
     private long level;
     @Column
     @JsonIgnore

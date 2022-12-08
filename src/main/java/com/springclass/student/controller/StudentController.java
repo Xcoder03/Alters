@@ -22,6 +22,7 @@ public class StudentController {
 
     @GetMapping("/{id}")
        public Optional<Student> getStudentID(@PathVariable(name="id") int stdid){
+
         Optional<Student> byID = stdrepo.findById(stdid);
         return byID;
     }
@@ -34,6 +35,11 @@ public class StudentController {
     @GetMapping("/filterbylevel/{level}")
     public List<Student> getbyLevel(@PathVariable(name="level") long lvl){
         return stdrepo.findByLevel(lvl);
+    }
+
+    @GetMapping("/filterbygender/{gender}")
+    public List<Student> getbyGender(@PathVariable(name="level") String gen){
+        return stdrepo.findByGender(gen);
     }
 
 
