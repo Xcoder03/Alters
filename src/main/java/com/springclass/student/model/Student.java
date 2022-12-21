@@ -13,6 +13,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +26,7 @@ import java.time.LocalDate;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id")
      private  int id;
     @Column
     @NotNull
@@ -40,10 +42,13 @@ public class Student {
     private String department;
     @Column
     @NotNull
-
     private long level;
     @Column
     @JsonIgnore
 
     private LocalDate registeredDate;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_student_id",referencedColumnName = "student_id")
+    private List<Address>  address;
 }

@@ -1,5 +1,6 @@
 package com.springclass.student.controller;
 
+import com.springclass.student.dao.AddressRespository;
 import com.springclass.student.dao.StudentRespository;
 import com.springclass.student.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import java.util.Optional;
 public class StudentController {
     @Autowired
     private StudentRespository stdrepo;
+
+    @Autowired
+    private AddressRespository adrepo;
 
     // get requests
     @GetMapping()
