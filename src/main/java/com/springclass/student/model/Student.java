@@ -13,7 +13,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -51,4 +53,13 @@ public class Student {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_student_id",referencedColumnName = "student_id")
     private List<Address>  address;
+
+
+    @ManyToMany(cascade = CascadeType.ALL )
+    @JoinTable(
+            name = "assigned_project",
+            joinColumns =  @JoinColumn(name = "student_id") ,
+            inverseJoinColumns =  @JoinColumn(name = "project_id")
+    )
+    private Set<Project> project=new HashSet<>();
 }
