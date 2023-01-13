@@ -1,9 +1,10 @@
 package com.springclass.student.controller;
 
 import com.springclass.student.dao.AddressRespository;
-import com.springclass.student.dao.StudentRespository;
 import com.springclass.student.model.Student;
+import com.springclass.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,37 +14,48 @@ import java.util.Optional;
 @RequestMapping("apis/v1/students")
 public class StudentController {
     @Autowired
-    private StudentRespository stdrepo;
+    private StudentService stdservice;
 
-    @Autowired
-    private AddressRespository adrepo;
+
 
     // get requests
     @GetMapping()
     public List<Student> getallStudent(){
-        return  stdrepo.findAll();
+        return  stdservice.getAllStudentDetails();
     }
 
     @GetMapping("/{id}")
        public Optional<Student> getStudentID(@PathVariable(name="id") int stdid){
 
-        Optional<Student> byID = stdrepo.findById(stdid);
+        Optional<Student> byID = stdservice.getAllStudentDetailsById(stdid);
         return byID;
     }
 
     @GetMapping("/filterbydept/{department}")
     public List<Student> getbyDepartment(@PathVariable(name="department") String dept){
-        return stdrepo.findByDepartment(dept);
+        return stdservice.getByDepartment(dept);
     }
 
     @GetMapping("/filterbylevel/{level}")
     public List<Student> getbyLevel(@PathVariable(name="level") long lvl){
-        return stdrepo.findByLevel(lvl);
+        return stdservice.getByLevel(lvl);
     }
 
     @GetMapping("/filterbygender/{gender}")
     public List<Student> getbyGender(@PathVariable(name="level") String gen){
-        return stdrepo.findByGender(gen);
+        return stdservice.getByGender(gen);
+    }
+
+    @GetMapping("/pagination/{pageNumber}/{pageSize}")
+    public Page<Student> studentPage(@PathVariable Integer pageNumber, @PathVariable Integer pageSize){
+        return stdservice.getStudentPagination(pageNumber,pageSize);
+    }
+
+    @GetMapping("/pagination/{pageNumber}/{pageSize}/{sortedProperty}")
+    public Page<Student> studentPageffj(@PathVariable Integer pageNumber,
+                                        @PathVariable Integer pageSize,
+                                        @PathVariable String sortedProperty){
+        return stdservice.getStudentPagination(pageNumber, pageSize, sortedProperty);
     }
 
 
@@ -52,21 +64,13 @@ public class StudentController {
     //post requests
     @PostMapping()
     public Student saveStudent(@RequestBody  Student student){
-        return  stdrepo.save(student);
+        return  stdservice.saveStudent(student);
     }
 
     // delete requests
     @DeleteMapping("/{id}")
     public String deleteStudent(@PathVariable(name="id") int id){
-        String status = "";
-        if(stdrepo.existsById(id)){
-            stdrepo.deleteById(id);
-            status = "Successful";
-        }
-        else
-            status = "unsuccesful";
-
-        return  status;
+        return  stdservice.deleteStudent(id);
 
     }
 

@@ -62,6 +62,11 @@ public class StudentService {
         return stdrepo.findByGender(gender);
     }
 
+
+    public List<Student> getByLevel(long level){
+        return stdrepo.findByLevel(level);
+    }
+
     public Page<Student> getStudentPagination(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         return stdrepo.findAll(pageable);
